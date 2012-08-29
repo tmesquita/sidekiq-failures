@@ -5,14 +5,16 @@ h1 Failed Jobs
 
   table class="table table-striped table-bordered"
     tr
+      th index
       th Worker
       th Args
       th Queue
       th Exception
       th Error
       th Failed At
-    - @messages.each do |msg|
+    - @messages.each_with_index do |msg, index|
       tr
+        td= index
         td= msg['worker']
         td= msg['payload']['args'].inspect
         td= msg['queue']
