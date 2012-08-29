@@ -12,6 +12,8 @@ h1 Failed Jobs
       th Exception
       th Error
       th Failed At
+      th Retry Count
+
     - @messages.each_with_index do |msg, index|
       tr
         td= index
@@ -21,6 +23,7 @@ h1 Failed Jobs
         td= msg['exception']
         td= msg['error']
         td= msg['failed_at']
+        td= msg['num_retries']
 
   == slim :_paging, :locals => { :url => "#{root_path}queues/#{@name}" }
 - else
