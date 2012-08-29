@@ -10,7 +10,6 @@ module Sidekiq
         if failed_job
           data = JSON.parse Sidekiq.redis{|conn| conn.lindex(:failed, failed_job)}
           data["num_retries"] += 1
-          data["failed_at"] = Time.now.strftime("%Y/%m/%d %H:%M:%S %Z")
           Sidekiq.redis { |conn| conn.lset(:failed, failed_job, Sidekiq.dump_json(data)) }
         else
 
