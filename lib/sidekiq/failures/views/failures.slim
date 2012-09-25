@@ -1,4 +1,5 @@
 h1 Failed Jobs
+a href='?clear_jobs=true' Clear failed jobs
 
 - if @messages.size > 0
   == slim :_paging, :locals => { :url => "#{root_path}failures#{@name}" }

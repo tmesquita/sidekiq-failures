@@ -12,6 +12,11 @@ module Sidekiq
         end
 
         app.get "/failures" do
+          if params[:clear_jobs] && (params[:clear_jobs].eql? "true")
+            redis = Redis.new
+            redis.del 'failed'
+          end
+
           @count = (params[:count] || 25).to_i
           (@current_page, @total_size, @messages) = page("failed", params[:page], @count)
           @messages = @messages.map { |msg| Sidekiq.load_json(msg) }
