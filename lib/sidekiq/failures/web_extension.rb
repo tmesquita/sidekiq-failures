@@ -14,6 +14,7 @@ module Sidekiq
         app.get "/failures" do
           if params[:clear_jobs] && (params[:clear_jobs].eql? "true")
             redis = Redis.new
+            redis.del 'failed'
             redis.set 'stat:failed', 0
           end
 
